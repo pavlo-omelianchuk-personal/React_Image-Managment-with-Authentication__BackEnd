@@ -1,23 +1,15 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+const mongoose = require("mongoose");
+const SchemaImg = mongoose.Schema;
 
-const schemaImg = new Schema({
-    username: { type: String, unique: true, required: true },
-    filename: { type: String, unique: true, required: true },
-    hash: { type: String, required: true },
-    url: { type: String, required: true },
-    firstName: { type: String, required: true },
-    lastName: { type: String, required: true },
-    createdDate: { type: Date, default: Date.now }
+const schemaImg = new SchemaImg({
+  filename: { type: String, unique: true, required: true },
+  path: { type: String, required: true },
+  createdDate: { type: Date, default: Date.now },
 });
 
-schemaImg.set('toJSON', {
-    virtuals: true,
-    versionKey: false,
-    transform: function (doc, ret) {
-        delete ret._id;
-        delete ret.hash;
-    }
+schemaImg.set("toJSON", {
+  virtuals: true,
+  versionKey: false,
 });
 
-module.exports = mongoose.model('Image', schemaImg);
+module.exports = mongoose.model("Image", schemaImg);
